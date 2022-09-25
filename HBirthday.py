@@ -29,10 +29,12 @@ def get_birthdays_per_week(users):
         if (datetime.now()).weekday() == 0:
             if (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) == timedelta(-2):
                 result["Monday"] += (individ["name"]) + ", "
-            if (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) == timedelta(-1):
-                result["Monday"] += (individ["name"]) + ", "   
-        timedelta(0) <= (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) <= timedelta(7)
-        result[day_name[((individ["birthday"]).replace(year=(datetime.now()).year).weekday())]] += (individ["name"]) + ", "
+            elif (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) == timedelta(-1):
+                result["Monday"] += (individ["name"]) + ", "
+            elif timedelta(0) <= (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) <= timedelta(7):
+                result[day_name[((individ["birthday"]).replace(year=(datetime.now()).year).weekday())]] += (individ["name"]) + ", "
+        elif timedelta(0) <= (((individ["birthday"]).replace(year=(datetime.now()).year)) - (datetime.now()).date()) <= timedelta(7):
+            result[day_name[((individ["birthday"]).replace(year=(datetime.now()).year).weekday())]] += (individ["name"]) + ", "
 
     for key, value in result.items():
         print(f"{key}: {value[:-2]}")
